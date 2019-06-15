@@ -1,4 +1,4 @@
 <template lang="pug">
   div
-    | works
+    | skills
 </template>

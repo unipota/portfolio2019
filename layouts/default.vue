@@ -8,25 +8,27 @@
       .hero-text
         | I love design.
     .spacer(:style="spacerStyle")
-    .window
+    .window(v-if="!closed")
       .window__body
         .window__header
           .window__controller
-            .window__controller-button--red
+            .window__controller-button--red(@click="close")
             .window__controller-button--yellow
-            .window__controller-button--green
+            .window__controller-button--green(@click="fullScreen")
           .window__title
-            | HOME
+            transition-group(name="text")
+              span(v-for="(t,i) in titleObjects[pageTitleIndex]" :key="t.id" v-text="t.text")
         .window__url-bar
           .window__url-bar-button(@click="reload")
             img(src="~assets/ReloadIcon.svg")
           nuxt-link(to="/")
             .window__url-bar-button
               img(src="~assets/HomeIcon.svg")
-          input.window__url-bar-input(type="text" v-model="routePath")
+          input.window__url-bar-input(type="text" v-model.lazy="routePath")
         .window__tool-bar
-          nuxt-link(to="/profile") profile
-          nuxt-link(to="/works") works
+          nuxt-link(to="profile") profile
+          nuxt-link(to="works") works
+          nuxt-link(to="skills") skills
         .window__content
           nuxt
     .footer
@@ -35,7 +37,27 @@
 <script>
 export default {
   name: 'DefaultRayout',
+  data() {
+    return {
+      titles: ['ERROR', 'HOME', 'PROFILE', 'WORKS', 'SKILLS'],
+      titleObjects: [],
+      closed: false
+    }
+  },
   computed: {
+    pageTitleIndex() {
+      switch (this.routeName) {
+        case 'index':
+          return 1
+        case 'profile':
+          return 2
+        case 'works':
+          return 3
+        case 'skills':
+          return 4
+      }
+      return 0
+    },
     routeName() {
       return this.$route.name
     },
@@ -53,7 +75,28 @@ export default {
       }
     }
   },
+  created() {
+    this.titleObjects = this.titles.map(t => this.convText(t))
+  },
   methods: {
+    convText(text) {
+      const words = {}
+      const result = text.split('').map(t => {
+        words[t] = words[t] ? ++words[t] : 1
+        return { id: `${t}-${words[t]}`, text: t }
+      })
+      return Object.freeze(result)
+    },
+    fullScreen() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen()
+      } else {
+        document.documentElement.requestFullscreen()
+      }
+    },
+    close() {
+      this.closed = true
+    },
     reload() {
       location.reload(false)
     }
@@ -75,7 +118,7 @@ export default {
   width: 100vw
   height: 100vh
   overflow: scroll
-  background: linear-gradient(180deg, #23CAC0 0%, rgba(90, 206, 95, 0.3) 80%)
+  background: white linear-gradient(180deg, #23CAC0 0%, rgba(90, 206, 95, 0.3) 80%)
   transition: all .5s
 
   &::-webkit-scrollbar
@@ -111,7 +154,7 @@ export default {
     font-size: 1.5rem
 
 .spacer
-  transition: height 1s $easeInOutCubic
+  transition: height 1.5s $easeInOutCubic
 
 .window
   position: relative
@@ -142,6 +185,7 @@ export default {
     font:
       size: 20px
       weight: 700
+    height: 25px
     color: #8C8C8C
 
   %__controller-button
@@ -222,9 +266,20 @@ export default {
       outline: none
       box-shadow: 0 0 0 2px #2FEBC9
 
+  .window__tool-bar
+    margin-top: 12px
+
   .window__content
     padding-top: 16px
 
 .footer
   height: 64px
+
+.text
+  &-enter-active, &-leave-active, &-move
+    transition: all 1s
+  &-leave-active
+    position: absolute
+  &-enter, &-leave-to
+    opacity: 0
 </style>
