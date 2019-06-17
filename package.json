@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "dev": "nuxt",
+    "dev": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3000 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate --modern=client"
@@ -20,10 +20,13 @@
     "@nuxtjs/eslint-config": "^0.0.1",
     "@nuxtjs/eslint-module": "^0.0.1",
     "@nuxtjs/style-resources": "^0.1.2",
+    "@tweenjs/tween.js": "^17.4.0",
     "awesome-sass-easing": "^1.1.2",
     "babel-eslint": "^10.0.1",
+    "color": "^3.1.2",
+    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-prettier": "^5.0.0",
     "eslint-config-standard": ">=12.0.0",
     "eslint-plugin-import": ">=2.17.3",
     "eslint-plugin-jest": ">=22.6.4",
@@ -33,12 +36,14 @@
     "eslint-plugin-promise": ">=4.1.1",
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.2.2",
+    "gh-pages": "^2.0.1",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "ress": "^1.2.2",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "vue-flip-toolkit": "^1.3.0"
   }
 }

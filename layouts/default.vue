@@ -1,12 +1,13 @@
 <template lang="pug">
-  .container
+  .container(:style="containerStyle")
     .hero-container
-      .hero-logo
+      .hero-logo(@click="closed=false")
         img(src="~assets/u_logo.svg")
       .hero-title
         img(src="~assets/unipota.me.svg")
       .hero-text
         | I love design.
+      .hero-background
     .spacer(:style="spacerStyle")
     .window(v-if="!closed")
       .window__body
@@ -21,42 +22,86 @@
         .window__url-bar
           .window__url-bar-button(@click="reload")
             img(src="~assets/ReloadIcon.svg")
-          nuxt-link(to="/")
-            .window__url-bar-button
+          nuxt-link.window__url-bar-button(to="/")
               img(src="~assets/HomeIcon.svg")
           input.window__url-bar-input(type="text" v-model.lazy="routePath")
-        .window__tool-bar
-          nuxt-link(to="profile") profile
-          nuxt-link(to="works") works
-          nuxt-link(to="skills") skills
+        flipper.window__tool-bar.toolbar--expanded(:flipKey="toolbarExpanded" v-if="toolbarExpanded")
+          .window__link-item
+            flipped(flipId="link-item-profile-icon")
+              nuxt-link.window__link-button--profile(to="profile")
+                img(src="~assets/IconProfile.svg")
+            flipped(flipId="link-item-profile-label")
+              span.window__link-label
+                | profile
+          .window__link-item
+            flipped(flipId="link-item-skills-icon")
+              nuxt-link.window__link-button--skills(to="skills")
+                img(src="~assets/IconSkill.svg")
+            flipped(flipId="link-item-skills-label")
+              span.window__link-label
+                | skills
+          .window__link-item
+            flipped(flipId="link-item-works-icon")
+              nuxt-link.window__link-button--works(to="works")
+                img(src="~assets/IconWork.svg")
+            flipped(flipId="link-item-works-label")
+              span.window__link-label
+                | works
+        flipper.window__tool-bar(:flipKey="toolbarExpanded" v-else)
+          .window__link-item
+            flipped(flipId="link-item-profile-icon")
+              nuxt-link.window__link-button--profile(to="profile")
+                img(src="~assets/IconProfile.svg")
+            flipped(flipId="link-item-profile-label")
+              span.window__link-label
+                | profile
+          .window__link-item
+            flipped(flipId="link-item-skills-icon")
+              nuxt-link.window__link-button--skills(to="skills")
+                img(src="~assets/IconSkill.svg")
+            flipped(flipId="link-item-skills-label")
+              span.window__link-label
+                | skills
+          .window__link-item
+            flipped(flipId="link-item-works-icon")
+              nuxt-link.window__link-button--works(to="works")
+                img(src="~assets/IconWork.svg")
+            flipped(flipId="link-item-works-label")
+              span.window__link-label
+                | works
         .window__content
-          nuxt
+          transition(name="layout" mode="out-in")
+            nuxt
     .footer
 </template>
 
 <script>
+import Color from 'color'
+import TWEEN from '@tweenjs/tween.js'
+
+import { Flipper, Flipped } from 'vue-flip-toolkit'
+
 export default {
   name: 'DefaultRayout',
+  components: { Flipper, Flipped },
   data() {
     return {
       titles: ['ERROR', 'HOME', 'PROFILE', 'WORKS', 'SKILLS'],
       titleObjects: [],
-      closed: false
+      closed: false,
+      allowScroll: false,
+      topColor: Object,
+      tweenedTopColor: Object,
+      bottomColor: Object,
+      toolbarExpanded: true
     }
   },
   computed: {
     pageTitleIndex() {
-      switch (this.routeName) {
-        case 'index':
-          return 1
-        case 'profile':
-          return 2
-        case 'works':
-          return 3
-        case 'skills':
-          return 4
-      }
-      return 0
+      const index = ['index', 'profile', 'works', 'skills'].findIndex(
+        s => s === this.routeName
+      )
+      return index !== -1 ? index + 1 : 0
     },
     routeName() {
       return this.$route.name
@@ -69,14 +114,70 @@ export default {
         this.$router.push(to)
       }
     },
+    containerStyle() {
+      return {
+        overflowY: this.allowScroll ? 'scroll' : 'hidden',
+        background: `white linear-gradient(180deg, ${Color(
+          this.tweenedTopColor
+        ).rgb()} 0%, ${Color(this.bottomColor)
+          .alpha(0.3)
+          .rgb()} 80%)`
+      }
+    },
     spacerStyle() {
       return {
-        height: this.routePath === '/' ? '60vh' : '24px'
+        height: this.routePath === '/' ? '60vh' : '5vw'
+      }
+    },
+    toolbarClass() {
+      return {
+        'toolbar--expanded': this.toolbarExpanded
       }
     }
   },
+  watch: {
+    topColor() {
+      function animate() {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate)
+        }
+      }
+
+      new TWEEN.Tween(this.tweenedTopColor).to(this.topColor, 750).start()
+
+      animate()
+    },
+    routePath: {
+      handler(to) {
+        switch (to) {
+          case '/':
+            this.topColor = { r: 35, g: 202, b: 192 }
+            this.toolbarExpanded = true
+            break
+          case '/profile':
+            this.topColor = { r: 170, g: 62, b: 208 }
+            this.toolbarExpanded = false
+            break
+          case '/works':
+            this.topColor = { r: 208, g: 97, b: 62 }
+            this.toolbarExpanded = false
+            break
+          case '/skills':
+            this.topColor = { r: 62, g: 156, b: 208 }
+            this.toolbarExpanded = false
+            break
+          default:
+            this.topColor = { r: 208, g: 62, b: 62 }
+            this.toolbarExpanded = false
+        }
+      },
+      immediate: true
+    }
+  },
   created() {
+    this.bottomColor = { r: 90, g: 206, b: 95 }
     this.titleObjects = this.titles.map(t => this.convText(t))
+    this.tweenedTopColor = Object.assign({}, this.topColor)
   },
   methods: {
     convText(text) {
@@ -106,6 +207,7 @@ export default {
 
 <style lang="sass" scoped>
 .container
+  position: absolute
   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
   font-size: 16px
   word-spacing: 1px
@@ -115,10 +217,9 @@ export default {
   -webkit-font-smoothing: antialiased
   box-sizing: border-box
   min-height: 100vh
-  width: 100vw
-  height: 100vh
-  overflow: scroll
-  background: white linear-gradient(180deg, #23CAC0 0%, rgba(90, 206, 95, 0.3) 80%)
+  width: 100%
+  height: 100%
+  overflow-x: hidden
   transition: all .5s
 
   &::-webkit-scrollbar
@@ -143,6 +244,7 @@ export default {
   top: 10vw
   left: 10vw
   pointer-events: none
+  // overflow: hidden
 
   .hero-logo
 
@@ -153,6 +255,25 @@ export default {
     color: white
     font-size: 1.5rem
 
+  .hero-background
+
+    %__line
+      position: absolute
+      height: 20px
+      background: rgba(192,45,98,0.4)
+      border-radius: 9999px
+
+      &::before
+        position: absolute
+        right: 0
+        content: ''
+        display: block
+        background: rgba(192,45,98,0.4)
+        width: 20px
+        height: 20px
+        border-radius: 100%
+        transform: translateX(-100%) translate(100%)
+
 .spacer
   transition: height 1.5s $easeInOutCubic
 
@@ -162,7 +283,7 @@ export default {
 
   &__body
     width: 80vw
-    height: 80vh
+    height: 90vh
     margin: auto
     padding: 16px
     background: white
@@ -242,6 +363,7 @@ export default {
 
   &__url-bar-input
     flex: 1
+    min-width: 0
     font:
       size: 14px
       weight: 700
@@ -267,7 +389,48 @@ export default {
       box-shadow: 0 0 0 2px #2FEBC9
 
   .window__tool-bar
+    display: flex
+    justify-content: center
+    margin-top: 4px
+    padding: 24px 8px 0
+
+    .toolbar--expanded &
+
+  &__link-item
+    display: flex
+    flex-flow: row
+    margin: 0 12px 0
+
+    .toolbar--expanded &
+      flex-flow: column
+
+  &__link-label
     margin-top: 12px
+    display: inline-block
+    width: 100%
+    text-align: center
+    font:
+      weight: bold
+
+  %__link-button
+    display: flex
+    width: 60px
+    height: 60px
+    border-radius: 100%
+    justify-content: center
+    align-items: center
+
+  &__link-button--profile
+    @extend %__link-button
+    background: #F59292
+
+  &__link-button--skills
+    @extend %__link-button
+    background: #77B6F0
+
+  &__link-button--works
+    @extend %__link-button
+    background: #ED92F5
 
   .window__content
     padding-top: 16px

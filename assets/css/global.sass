@@ -1,1 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap')
+
+html
+  color: #525252
+  overflow: hidden
+
+.layout-enter-active, .layout-leave-active
+  transition: opacity .5s, transform .5s
+
+.layout-enter
+  opacity: 0
+  transform: translateY(-3px)
+
+.layout-leave-to
+  opacity: 0
+  transform: translateY(3px)

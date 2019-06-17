@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    | profile
+    h3 WATARU Yasunishi
 </template>
 
 <style lang="sass" scoped></style>
