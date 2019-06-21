@@ -22,18 +22,6 @@
 	@license MIT
 	*/
 
-/*!
- * vue-no-ssr v1.1.1
- * (c) 2018-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-/*!
- * Vue-Lazyload.js v1.2.6
- * (c) 2018 Awe <hilongjw@gmail.com>
- * Released under the MIT License.
- */
-
 /*! @license Rematrix v0.2.2
 
   	Copyright 2018 Fisssion LLC.
@@ -56,3 +44,15 @@
   	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   	THE SOFTWARE.
   */
+
+/*!
+ * vue-no-ssr v1.1.1
+ * (c) 2018-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+/*!
+ * Vue-Lazyload.js v1.2.6
+ * (c) 2018 Awe <hilongjw@gmail.com>
+ * Released under the MIT License.
+ */
