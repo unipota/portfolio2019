@@ -10,22 +10,21 @@
       .hero-background
     .spacer(:style="spacerStyle")
     .window(v-if="!closed")
-      .window__body
+      .window__body(:class="windowBodyClass")
         .window__header
           .window__controller
             .window__controller-button--red(@click="close")
             .window__controller-button--yellow
             .window__controller-button--green(@click="fullScreen")
           .window__title
-            transition-group(name="text")
-              span(v-for="(t,i) in titleObjects[pageTitleIndex]" :key="t.id" v-text="t.text")
+            | {{titles[pageTitleIndex]}}
         .window__url-bar
           .window__url-bar-button(@click="reload")
             img(src="~assets/ReloadIcon.svg")
           nuxt-link.window__url-bar-button(to="/")
               img(src="~assets/HomeIcon.svg")
           input.window__url-bar-input(type="text" v-model.lazy="routePath")
-        flipper.window__tool-bar.toolbar--expanded(:flipKey="toolbarExpanded" v-if="toolbarExpanded")
+        flipper.window__tool-bar--expanded(:flipKey="toolbarExpanded" v-if="toolbarExpanded")
           .window__link-item
             flipped(flipId="link-item-profile-icon")
               nuxt-link.window__link-button--profile(to="profile")
@@ -48,23 +47,23 @@
               span.window__link-label
                 | works
         flipper.window__tool-bar(:flipKey="toolbarExpanded" v-else)
-          .window__link-item
+          nuxt-link.window__link-item(to="profile")
             flipped(flipId="link-item-profile-icon")
-              nuxt-link.window__link-button--profile(to="profile")
+              .window__link-button--profile
                 img(src="~assets/IconProfile.svg")
             flipped(flipId="link-item-profile-label")
               span.window__link-label
                 | profile
-          .window__link-item
+          nuxt-link.window__link-item(to="skills")
             flipped(flipId="link-item-skills-icon")
-              nuxt-link.window__link-button--skills(to="skills")
+              .window__link-button--skills
                 img(src="~assets/IconSkill.svg")
             flipped(flipId="link-item-skills-label")
               span.window__link-label
                 | skills
-          .window__link-item
+          nuxt-link.window__link-item(to="works")
             flipped(flipId="link-item-works-icon")
-              nuxt-link.window__link-button--works(to="works")
+              .window__link-button--works
                 img(src="~assets/IconWork.svg")
             flipped(flipId="link-item-works-label")
               span.window__link-label
@@ -72,7 +71,6 @@
         .window__content
           transition(name="layout" mode="out-in")
             nuxt
-    .footer
 </template>
 
 <script>
@@ -86,13 +84,14 @@ export default {
   components: { Flipper, Flipped },
   data() {
     return {
+      isMobile: false,
       titles: ['ERROR', 'HOME', 'PROFILE', 'WORKS', 'SKILLS'],
-      titleObjects: [],
       closed: false,
       allowScroll: false,
       topColor: Object,
       tweenedTopColor: Object,
       bottomColor: Object,
+      windowExpanded: false,
       toolbarExpanded: true
     }
   },
@@ -126,7 +125,12 @@ export default {
     },
     spacerStyle() {
       return {
-        height: this.routePath === '/' ? '60vh' : '5vw'
+        height: this.routePath === '/' ? 'calc(100vh - 250px)' : '3vh'
+      }
+    },
+    windowBodyClass() {
+      return {
+        'window--expanded': this.windowExpanded
       }
     },
     toolbarClass() {
@@ -152,22 +156,27 @@ export default {
         switch (to) {
           case '/':
             this.topColor = { r: 35, g: 202, b: 192 }
+            this.windowExpanded = false
             this.toolbarExpanded = true
             break
           case '/profile':
-            this.topColor = { r: 170, g: 62, b: 208 }
-            this.toolbarExpanded = false
-            break
-          case '/works':
-            this.topColor = { r: 208, g: 97, b: 62 }
+            this.topColor = { r: 245, g: 146, b: 146 }
+            this.windowExpanded = true
             this.toolbarExpanded = false
             break
           case '/skills':
             this.topColor = { r: 62, g: 156, b: 208 }
+            this.windowExpanded = true
+            this.toolbarExpanded = false
+            break
+          case '/works':
+            this.topColor = { r: 236, g: 54, b: 240 }
+            this.windowExpanded = true
             this.toolbarExpanded = false
             break
           default:
             this.topColor = { r: 208, g: 62, b: 62 }
+            this.windowExpanded = true
             this.toolbarExpanded = false
         }
       },
@@ -176,17 +185,11 @@ export default {
   },
   created() {
     this.bottomColor = { r: 90, g: 206, b: 95 }
-    this.titleObjects = this.titles.map(t => this.convText(t))
     this.tweenedTopColor = Object.assign({}, this.topColor)
   },
   methods: {
-    convText(text) {
-      const words = {}
-      const result = text.split('').map(t => {
-        words[t] = words[t] ? ++words[t] : 1
-        return { id: `${t}-${words[t]}`, text: t }
-      })
-      return Object.freeze(result)
+    handleWindowResize(e) {
+      this.mql = e
     },
     fullScreen() {
       if (document.fullscreenElement) {
@@ -249,7 +252,7 @@ export default {
   .hero-logo
 
   .hero-title
-    margin-top: 84px
+    margin-top: 16vh
 
   .hero-text
     color: white
@@ -280,15 +283,31 @@ export default {
 .window
   position: relative
   z-index: 10
+  +mq(pc)
+    position: absolute
+    right: 10vw
+    top: 12vh
 
   &__body
+    display: flex
+    flex-flow: column
     width: 80vw
-    height: 90vh
+    height: 94vh
     margin: auto
     padding: 16px
     background: white
     border-radius: 16px
     box-shadow: 0px 12px 24px 0 rgba(0, 0, 0, 0.4)
+    transition: all .5s $authenticMotion
+    +mq(pc)
+      width: 40vw
+      height: 70vh
+      min-height: 500px
+      max-width: 400px
+
+    &.window--expanded
+      +mq(sp)
+        width: calc(100vw - 32px)
 
   &__header
     width: 100%
@@ -390,50 +409,98 @@ export default {
 
   .window__tool-bar
     display: flex
+    justify-content: flex-start
+    margin-top: 4px
+    padding: 12px 2px 0
+
+    .window__link-item
+      display: flex
+      flex-flow: row
+      align-items: center
+      margin: 0 12px 0 0px
+
+    .window__link-label
+      display: inline-block
+      margin-left: 6px
+      width: 100%
+      text-align: center
+      color: #8c8c8c
+      font:
+        size: 0.9em
+        weight: bold
+
+    %__link-button
+      flex-shrink: 0
+      display: flex
+      width: 24px
+      height: 24px
+      border-radius: 100%
+      justify-content: center
+      align-items: center
+
+      img
+        width: 50%
+        height: auto
+
+    .window__link-button--profile
+      @extend %__link-button
+      background: #F59292
+
+    .window__link-button--skills
+      @extend %__link-button
+      background: #77B6F0
+
+    .window__link-button--works
+      @extend %__link-button
+      background: #ED92F5
+
+  .window__tool-bar--expanded
+    display: flex
     justify-content: center
     margin-top: 4px
     padding: 24px 8px 0
 
-    .toolbar--expanded &
-
-  &__link-item
-    display: flex
-    flex-flow: row
-    margin: 0 12px 0
-
-    .toolbar--expanded &
+    .window__link-item
+      display: flex
       flex-flow: column
+      margin: 0 12px 0
 
-  &__link-label
-    margin-top: 12px
-    display: inline-block
-    width: 100%
-    text-align: center
-    font:
-      weight: bold
+    .window__link-label
+      margin-top: 12px
+      display: inline-block
+      width: 100%
+      text-align: center
+      font:
+        weight: bold
 
-  %__link-button
-    display: flex
-    width: 60px
-    height: 60px
-    border-radius: 100%
-    justify-content: center
-    align-items: center
+    %__link-button
+      display: flex
+      width: 60px
+      height: 60px
+      border-radius: 100%
+      justify-content: center
+      align-items: center
 
-  &__link-button--profile
-    @extend %__link-button
-    background: #F59292
+    .window__link-button--profile
+      @extend %__link-button
+      background: #F59292
 
-  &__link-button--skills
-    @extend %__link-button
-    background: #77B6F0
+    .window__link-button--skills
+      @extend %__link-button
+      background: #77B6F0
 
-  &__link-button--works
-    @extend %__link-button
-    background: #ED92F5
+    .window__link-button--works
+      @extend %__link-button
+      background: #ED92F5
 
   .window__content
-    padding-top: 16px
+    margin-top: 16px
+    flex: 1
+    overflow:
+      x: hidden
+      y: scroll
+
+    @extend %scroll-bar
 
 .footer
   height: 64px

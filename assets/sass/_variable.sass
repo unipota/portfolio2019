@@ -1,0 +1,26 @@
+%flex-center
+  display: flex
+  align-items: center
+  justify-content: center
+
+%scroll-bar
+  &::-webkit-scrollbar
+    width: 8px
+  &::-webkit-scrollbar:horizontal
+    display: none
+  &::-webkit-scrollbar-button
+    display: none
+  &::-webkit-scrollbar-piece
+    background: #eee
+  &::-webkit-scrollbar-piece:start
+    background: #eee
+  &::-webkit-scrollbar-thumb
+    background: #2FEBC9
+    border-radius: 999px
+  &::-webkit-scrollbar-corner
+    background: #333
+
+$breakpoints: ("pc": "screen and (min-width:680px)","sp": "screen and (max-width:679px)")
+=mq($breakpoint: pc)
+  @media #{map-get($breakpoints,$breakpoint)}
+    @content
