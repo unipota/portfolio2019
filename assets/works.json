@@ -1,24 +1,123 @@
 [
   {
+    "img": "uLogo.png",
+    "title": "portfolio2019",
+    "tags": ["Design","Web"],
+    "desc": "このサイト。<br>Nuxt.js on GitHub Pagesで運用しています。<br>Web技術が好きなことを表現するために「ブラウザ内ブラウザ」をデザインしました。<br>このブラウザはところどころでメタな機能を持っていて、ちょっと遊び心のあるかわいいサイトを目指しました。",
+    "links": [
+      {
+        "type": "GitHub",
+        "url": "https://github.com/unipota/portfolio2019",
+        "text": "GitHub"
+      }
+    ],
+    "subimgs": ["portfolio2019_home.png"]
+  },
+  {
     "img": "traP_logo.svg",
-    "title": "traP Logo",
-    "desc": "デジタル創作同好会traPのサークルロゴ制作",
-    "tags": ["Design"]
+    "title": "traP VisualIdentity",
+    "desc": "デジタル創作同好会traPのサークルロゴを始めとして、様々な制作物のデザインを行いました。",
+    "tags": ["Design"],
+    "links": [
+      {
+        "type": "link",
+        "url": "https://trap.jp",
+        "text": "traP公式サイト"
+      }
+    ],
+    "subimgs": ["card2018.png", "leaflet2018.png", "nobori.png","sound_collection.png", "polo_2017.png"]
   },
   {
     "img": "traQ_logo.png",
-    "title": "traQ-R",
-    "tags": ["Web", "UI"],
-    "desc": "チャットアプリtraQのUIデザイン及びフロントエンド"
+    "title": "traQ-R Client",
+    "tags": ["Design","Web"],
+    "desc": "チャットアプリtraQのUIデザイン及びフロントエンド実装。<br>Vue.js",
+    "links": [
+      {
+        "type": "link",
+        "url": "https://github.com/traPtitech/traQ-UI",
+        "text": "GitHub"
+      }
+    ]
   },
   {
     "img": "emort_logo.svg",
     "title": "emort",
-    "tags": ["Web", "UI"]
+    "tags": ["Design","Web"]
+  },
+  {
+    "img": "blanc_walking.gif",
+    "title": "ちぇすとなっつ！",
+    "tags": ["Game"]
+  },
+  {
+    "img": "frontier.png",
+    "title": "Tokyo Tech Fes. Logo & WebSites",
+    "tags": ["Design","Web"],
+    "subimgs": ["koudaisai2018.png", "koudaisai2017.png"],
+    "links": [
+      {
+        "type": "link",
+        "url": "https://2018.koudaisai.jp/",
+        "text": "工大祭公式サイト2018"
+      },
+      {
+        "type": "link",
+        "url": "https://2017.koudaisai.jp/",
+        "text": "工大祭公式サイト2017"
+      }
+    ]
+  },
+  {
+    "img": "deken_logo.png",
+    "title": "Design Lab. Logo",
+    "tags": ["Design"],
+    "subimgs": ["deken_meishi.png"]
+  },
+  {
+    "img": "cheese_logo.png",
+    "title": "チズケ研究会 Logo",
+    "tags": ["Design"],
+    "links": [
+      {
+        "type": "link",
+        "url": "https://books.narusejun.com/",
+        "text": "チズケ研究会公式サイト"
+      }
+    ]
+  },
+  {
+    "img": "traQList_logo.png",
+    "title": "traQList Logo",
+    "tags": ["Design"]
+  },
+  {
+    "img": "SHF_logo.png",
+    "title": "SkyHighFight Logo",
+    "tags": ["Design", "Game"]
   },
   {
     "img": "gacha_logo.png",
     "title": "課金王者ガチャキング Logo",
-    "tags": ["Design"]
+    "tags": ["Design", "Game"],
+    "links": [
+      {
+        "type": "link",
+        "url": "https://trap.jp/post/183/",
+        "text": "紹介記事"
+      }
+    ]
+  },
+  {
+    "img": "teq_waiting.gif",
+    "title": "titeQuest Graphics",
+    "tags": ["Design", "Game"],
+    "links": [
+      {
+        "type": "link",
+        "url": "https://trap.jp/post/91/",
+        "text": "紹介記事"
+      }
+    ]
   }
 ]

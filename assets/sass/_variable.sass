@@ -4,6 +4,12 @@
   justify-content: center
 
 %scroll-bar
+  // for firefox
+  scrollbar-color: rgba(44, 219, 187, 0.6) transparent
+  scrollbar-width: thin
+  -webkit-overflow-scrolling: touch
+  overflow-scrolling: touch
+
   &::-webkit-scrollbar
     width: 8px
   &::-webkit-scrollbar:horizontal
@@ -11,14 +17,15 @@
   &::-webkit-scrollbar-button
     display: none
   &::-webkit-scrollbar-piece
-    background: #eee
+    background: transparent
   &::-webkit-scrollbar-piece:start
-    background: #eee
+    background: transparent
   &::-webkit-scrollbar-thumb
-    background: #2FEBC9
+    transition: all .5s
+    background: linear-gradient(180deg, rgba(44, 219, 187, 0.6) 0%, rgba(124, 230, 41, 0.2) 100%)
     border-radius: 999px
   &::-webkit-scrollbar-corner
-    background: #333
+    background: transparent
 
 $breakpoints: ("pc": "screen and (min-width:680px)","sp": "screen and (max-width:679px)")
 =mq($breakpoint: pc)

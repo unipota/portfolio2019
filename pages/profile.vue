@@ -1,5 +1,6 @@
 <template lang="pug">
-  div
+  .profile-container
+    img.profile-icon(src="~assets/uni_600.png")
     h4 > name
     h3 WATARU Yasunishi
     br
@@ -39,11 +40,29 @@
 </template>
 
 <style lang="sass" scoped>
+.profile-container
+  padding: 0 12px 12px
+
 h4
   color: #8C8C8C
 
 a
+  color: #15436F
   display: inline-flex
+
+.profile-icon
+  display: block
+  margin: 12px auto 24px
+  width: 25%
+  height: 25%
+  border-radius: 100%
+  animation: box-shadow .5s forwards .3s
+
+@keyframes box-shadow
+  from
+    box-shadow: 0 0 0 0 rgba(35,202,192,0.3)
+  to
+    box-shadow: 0 4px 8px 0 rgba(35,202,192,0.3)
 
 .icon-link
   margin-left: 12px

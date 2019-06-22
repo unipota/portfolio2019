@@ -1,5 +1,5 @@
 <template lang="pug">
-  .button(:class="buttonClass" @click="handleClick")
+  .button(:class="buttonClass" @click="handleClick" :style="buttonStyle")
     | {{label}}
 </template>
 
@@ -14,12 +14,26 @@ export default {
     label: {
       type: String,
       default: ''
+    },
+    primaryColor: {
+      type: String,
+      default: 'gray'
+    },
+    secondaryColor: {
+      type: String,
+      default: 'gray'
     }
   },
   computed: {
     buttonClass() {
       return {
         'is-active': this.value
+      }
+    },
+    buttonStyle() {
+      return {
+        color: this.primaryColor,
+        backgroundColor: this.secondaryColor
       }
     }
   },
@@ -42,6 +56,7 @@ export default {
   cursor: pointer
   opacity: 0.3
   user-select: none
+  transition: all .5s
 
   &.is-active
     opacity: 1

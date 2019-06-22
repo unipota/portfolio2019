@@ -1,3 +1,5 @@
+import worksData from './assets/works.json'
+
 export default {
   mode: 'spa',
   head: {
@@ -63,7 +65,6 @@ export default {
     background_color: '#ffffff',
     display: 'standalone'
   },
-  router: {},
   loading: { color: '#fff', height: '2px' },
   css: ['ress', '~assets/sass/global.sass'],
   plugins: ['~plugins/vue-lazyload'],
@@ -71,8 +72,11 @@ export default {
   styleResources: {
     sass: ['~assets/sass/_variable.sass', '~assets/sass/_easings.sass']
   },
-  generte: {
-    fallback: true
+  generate: {
+    fallback: true,
+    routes: function() {
+      return worksData.map((_, index) => `/works/${index}`)
+    }
   },
   build: {
     extend(config, ctx) {}

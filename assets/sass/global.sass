@@ -1,20 +1,30 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap')
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:400,700&display=swap&subset=japanese')
 
 html
   color: #525252
   overflow: hidden
+  font-family: 'Quicksand', 'Source Sans Pro', 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
+  font-size: 16px
+  word-spacing: 1px
+  -ms-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
 
 a
   color: inherit
   text-decoration: none
 
-.layout-enter-active, .layout-leave-active
-  transition: opacity .5s, transform .5s
+.layout
+  &-enter-active, &-leave-active
+    transition: opacity .5s, transform .3s
 
-.layout-enter
-  opacity: 0
-  transform: translateY(-3px)
+  &-enter
+    opacity: 0
+    transform: translateY(-3px) scale(0.97)
 
-.layout-leave-to
-  opacity: 0
-  transform: translateY(3px)
+  &-leave-to
+    opacity: 0
+    transform: translateY(3px)
+
