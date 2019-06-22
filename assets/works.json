@@ -48,7 +48,15 @@
   {
     "img": "blanc_walking.gif",
     "title": "ちぇすとなっつ！",
-    "tags": ["Game"]
+    "desc": "PIXI.JSで制作した2Dアクションゲームです。<br>グラフィックは白葱が担当しています。",
+    "tags": ["Game"],
+    "links": [
+      {
+        "type": "link",
+        "url": "https://twitter.com/_winnie_ill",
+        "text": "白葱(twitter)"
+      }
+    ]
   },
   {
     "img": "frontier.png",
