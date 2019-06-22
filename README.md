@@ -1,6 +1,6 @@
 # portfolio2019
 
-[![CircleCI](https://circleci.com/gh/unipota/portfolio2019.svg?style=svg)](https://circleci.com/gh/unipota/portfolio2019)
+[![CircleCI](https://circleci.com/gh/unipota/portfolio2019/tree/master.svg?style=svg)](https://circleci.com/gh/unipota/portfolio2019/tree/master)
 
 ## Build Setup
 
