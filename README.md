@@ -1,6 +1,6 @@
 # portfolio2019
 
-> My fine Nuxt.js project
+[![CircleCI](https://circleci.com/gh/unipota/portfolio2019.svg?style=svg)](https://circleci.com/gh/unipota/portfolio2019)
 
 ## Build Setup
 
