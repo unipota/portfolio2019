@@ -9,17 +9,17 @@
           :secondaryColor="secondaryColors[i]")
     .works-item-container
       transition-group(name="works-filter")
-        nuxt-link.works-item(v-for="(w,i) in filteredData" :key="w.title" :to="`/works/${i}`")
-          img.works-item__image(v-lazy="`/img/${w.img}`")
+        nuxt-link.works-item(v-for="(w,i) in filteredData" :key="w.data.title" :to="`/works/${w.index}`")
+          img.works-item__image(v-lazy="`/img/${w.data.img}`")
           .works-item__details
             .works-item__tags
-              .works-item__tag(v-for="t in w.tags")
+              .works-item__tag(v-for="t in w.data.tags")
                 small-tag(
                   :backgroundColor="secondaryColors[filterCategories.findIndex(e=>e===t)]"
                   :textColor="primaryColors[filterCategories.findIndex(e=>e===t)]")
                   | {{t}}
             .works-item__title
-              | {{w.title}}
+              | {{w.data.title}}
 </template>
 
 <script>
@@ -44,10 +44,17 @@ export default {
       const enabledFilter = this.filterCategories.filter(
         (e, index) => this.filterActiveFlags[index]
       )
-      return this.worksData.filter(w => {
-        if (this.filterActiveFlags.every(e => !e)) return true
-        return enabledFilter.some(e => w.tags.includes(e))
-      })
+      return this.worksData
+        .map((w, i) => {
+          return {
+            data: w,
+            index: i
+          }
+        })
+        .filter(({ data, index }) => {
+          if (this.filterActiveFlags.every(e => !e)) return true
+          return enabledFilter.some(e => data.tags.includes(e))
+        })
     }
   },
   methods: {
