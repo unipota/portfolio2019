@@ -2,6 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/unipota/portfolio2019/tree/master.svg?style=svg)](https://circleci.com/gh/unipota/portfolio2019/tree/master)
 
+![Imgur](https://i.imgur.com/ZnQshvM.png)
+
 ## Build Setup
 
 ``` bash
