@@ -494,7 +494,9 @@ export default {
 
     .window__link-label
       display: inline-block
-      margin-left: 6px
+      margin:
+        right: 6px
+        left: 6px
       width: 100%
       text-align: center
       color: #8c8c8c
