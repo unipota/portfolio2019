@@ -222,7 +222,6 @@ export default {
 .container
   position: absolute
   box-sizing: border-box
-  min-height: 100vh
   width: 100%
   height: 100%
   overflow-x: hidden
