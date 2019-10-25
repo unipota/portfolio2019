@@ -15,6 +15,13 @@
       br
       | School of Computing (2016-20)
     br
+    h4 > intern
+    h3 Pixiv,
+      br
+      | VOYAGE GROUP,
+      br
+      | Merpay etc
+    br
     h4 > likes
     h3
       | Web programming / design,
