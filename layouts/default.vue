@@ -134,7 +134,7 @@ export default {
     },
     spacerStyle() {
       return {
-        height: this.routePath === '/' ? 'calc(100vh - 250px)' : '3vh'
+        height: this.routePath === '/' ? 'calc(100vh - 350px)' : '3vh'
       }
     },
     windowBodyClass() {

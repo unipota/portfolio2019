@@ -70,6 +70,9 @@ export default {
 
 <style lang="sass" scoped>
 .works-container
+  padding:
+    bottom: 64px
+
 .filter-container
   display: flex
   margin: 4px 0

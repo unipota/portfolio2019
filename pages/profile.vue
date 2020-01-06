@@ -48,7 +48,7 @@
 
 <style lang="sass" scoped>
 .profile-container
-  padding: 0 12px 12px
+  padding: 0 12px 64px
 
 h4
   color: #8C8C8C

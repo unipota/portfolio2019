@@ -1,8 +1,18 @@
 [
   {
+    "img": "tsundoku.png",
+    "title": "ツンドク",
+    "subimgs": ["tsundoku_screen.png"],
+    "tags": ["Design", "Web"],
+    "desc": "読まずに積んでいる「積読額」を計算してくれる読書管理サービスです。<br>直感的な使いやすさにこだわり、Webアプリで実現できる最高のUXを目指しました。<br>Vue.js/TypeScript/Go",
+    "links": [
+      { "type": "link", "url": "https://tsun-doku.app", "text": "ツンドク" }
+    ]
+  },
+  {
     "img": "uLogo.png",
     "title": "portfolio2019",
-    "tags": ["Design","Web"],
+    "tags": ["Design", "Web"],
     "desc": "このサイト。<br>Nuxt.js on GitHub Pagesで運用しています。<br>Web技術が好きなことを表現するために「ブラウザ内ブラウザ」をデザインしました。<br>このブラウザはところどころでメタな機能を持っていて、ちょっと遊び心のあるかわいいサイトを目指しました。",
     "links": [
       {
@@ -25,12 +35,18 @@
         "text": "traP公式サイト"
       }
     ],
-    "subimgs": ["card2018.png", "leaflet2018.png", "nobori.png","sound_collection.png", "polo_2017.png"]
+    "subimgs": [
+      "card2018.png",
+      "leaflet2018.png",
+      "nobori.png",
+      "sound_collection.png",
+      "polo_2017.png"
+    ]
   },
   {
     "img": "traQ_logo.png",
     "title": "traQ-R Client",
-    "tags": ["Design","Web"],
+    "tags": ["Design", "Web"],
     "desc": "チャットアプリtraQのUIデザイン及びフロントエンド実装。<br>Vue.js",
     "links": [
       {
@@ -43,7 +59,7 @@
   {
     "img": "emort_logo.svg",
     "title": "emort",
-    "tags": ["Design","Web"]
+    "tags": ["Design", "Web"]
   },
   {
     "img": "blanc_walking.gif",
@@ -61,7 +77,7 @@
   {
     "img": "frontier.png",
     "title": "Tokyo Tech Fes. Logo & WebSites",
-    "tags": ["Design","Web"],
+    "tags": ["Design", "Web"],
     "subimgs": ["koudaisai2018.png", "koudaisai2017.png"],
     "links": [
       {

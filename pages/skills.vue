@@ -46,7 +46,9 @@ export default {
 
 <style lang="sass" scoped>
 .skills-container
-  padding-top: 12px
+  padding:
+    top: 12px
+    bottom: 64px
   display: flex
   flex-wrap: wrap
 
