@@ -29,48 +29,36 @@
             nuxt-link.window__url-bar-button(to="/")
                 img(src="~assets/HomeIcon.svg")
             input.window__url-bar-input(type="text" v-model.lazy="routePath")
-          flipper.window__tool-bar--expanded(:flipKey="toolbarExpanded" v-if="toolbarExpanded")
+          div.window__tool-bar--expanded(:flipKey="toolbarExpanded" v-if="toolbarExpanded")
             nuxt-link.window__link-item(to="/profile")
-              flipped(flipId="link-item-profile-icon")
                 .window__link-button--profile
                   img(src="~assets/IconProfile.svg")
-              flipped(flipId="link-item-profile-label")
                 span.window__link-label
                   | profile
             nuxt-link.window__link-item(to="/skills")
-              flipped(flipId="link-item-skills-icon")
                 .window__link-button--skills
                   img(src="~assets/IconSkill.svg")
-              flipped(flipId="link-item-skills-label")
                 span.window__link-label
                   | skills
             nuxt-link.window__link-item(to="/works")
-              flipped(flipId="link-item-works-icon")
                 .window__link-button--works
                   img(src="~assets/IconWork.svg")
-              flipped(flipId="link-item-works-label")
                 span.window__link-label
                   | works
-          flipper.window__tool-bar(:flipKey="toolbarExpanded" v-else)
+          .window__tool-bar(:flipKey="toolbarExpanded" v-else)
             nuxt-link.window__link-item(to="/profile")
-              flipped(flipId="link-item-profile-icon")
                 .window__link-button--profile
                   img(src="~assets/IconProfile.svg")
-              flipped(flipId="link-item-profile-label")
                 span.window__link-label
                   | profile
             nuxt-link.window__link-item(to="/skills")
-              flipped(flipId="link-item-skills-icon")
                 .window__link-button--skills
                   img(src="~assets/IconSkill.svg")
-              flipped(flipId="link-item-skills-label")
                 span.window__link-label
                   | skills
             nuxt-link.window__link-item(to="/works")
-              flipped(flipId="link-item-works-icon")
                 .window__link-button--works
                   img(src="~assets/IconWork.svg")
-              flipped(flipId="link-item-works-label")
                 span.window__link-label
                   | works
           .window__content
@@ -82,11 +70,8 @@
 import Color from 'color'
 import TWEEN from '@tweenjs/tween.js'
 
-import { Flipper, Flipped } from 'vue-flip-toolkit'
-
 export default {
   name: 'DefaultRayout',
-  components: { Flipper, Flipped },
   data() {
     return {
       isMobile: false,
